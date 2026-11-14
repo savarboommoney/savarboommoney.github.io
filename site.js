@@ -7,6 +7,16 @@ const frame = $('frame'), first = $('top'), lvScales = $('lvScales');
 if (frame) {
 /* кадр 16:9 во весь экран; на телефоне Фемида правее и ниже, чтобы освободить верх под текст */
 function layout() {
+  // телефон: текст сверху в потоке, под ним Фемида целиком, по центру (композиция Фемиды в кадре: x 880–1670, y 110–860)
+  if (innerWidth < 760) {
+    const W = first.clientWidth, hero = first.querySelector('.hero');
+    const s = Math.min(W * 1.08 / 790, .62), top = hero.offsetTop + hero.offsetHeight - 30;
+    const dx = W / 2 - 1275 * s, dy = top - 110 * s;
+    frame.style.transform = `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${s.toFixed(5)})`;
+    first.style.height = Math.round(top + 770 * s) + 'px';
+    return;
+  }
+  first.style.height = '';
   const W = first.clientWidth, H = first.clientHeight, portrait = W / H < 1;
   const focus = portrait ? .66 : .5, ys = portrait ? .3 : 0;
   const s = Math.max(W / 1920, H / 1080), dw = 1920 * s, dh = 1080 * s;
@@ -14,6 +24,7 @@ function layout() {
   frame.style.transform = `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${s.toFixed(5)})`;
 }
 addEventListener('resize', layout); layout();
+addEventListener('load', layout); document.fonts && document.fonts.ready.then(layout);
 
 /* за мышкой: слои сцены расходятся по глубине, весы наклоняются (поверх покачивания из CSS) */
 const layers = [...frame.querySelectorAll('.ly')].map(el => [el, +el.dataset.d]);
@@ -255,6 +266,27 @@ if (blGrid) {
     topic = b.dataset.blTopic; document.querySelectorAll('[data-bl-topic]').forEach(x => x.classList.toggle('on', x === b)); apply();
   }));
   blSearch.addEventListener('input', apply);
+}
+
+/* ---------- телефон: список специализаций свёрнут до 8, кнопка «показать все»; подсказка свайпа у каруселей ---------- */
+if (innerWidth < 760) {
+  const g = document.querySelector('.svc-grid');
+  if (g && g.children.length > 8) {
+    g.classList.add('collapsed');
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'tp-button tp-button--outline svc-more';
+    b.textContent = 'Все специализации (' + g.children.length + ')';
+    b.addEventListener('click', () => { const c = g.classList.toggle('collapsed'); b.textContent = c ? 'Все специализации (' + g.children.length + ')' : 'Свернуть'; if (c) g.scrollIntoView({ block: 'start' }); });
+    g.after(b);
+  }
+  const ch = document.querySelector('.pg-chips .chips');
+  if (ch && ch.children.length > 8) {
+    ch.classList.add('collapsed');
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'tp-button tp-button--outline svc-more';
+    const lbl = () => ch.classList.contains('collapsed') ? 'Все направления (' + ch.children.length + ')' : 'Свернуть';
+    b.textContent = lbl(); b.addEventListener('click', () => { ch.classList.toggle('collapsed'); b.textContent = lbl(); });
+    ch.after(b);
+  }
+  document.querySelectorAll('.adv-grid,.art-grid,.vids').forEach(x => x.insertAdjacentHTML('afterend', '<p class="swipe-hint">Листайте →</p>'));
 }
 
 /* ---------- наклон карточек преимуществ за мышкой ---------- */

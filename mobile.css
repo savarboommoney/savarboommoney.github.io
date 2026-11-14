@@ -1,0 +1,219 @@
+/* =====================================================================
+   МОБИЛЬНАЯ ВЕРСИЯ (≤ 759 px) — отдельный интерфейс для телефона.
+   Подключается последним на всех страницах, перекрывает десктопные правила.
+   ===================================================================== */
+@media (max-width: 759px) {
+
+  /* ---------- база ---------- */
+  html{-webkit-text-size-adjust:100%}
+  body{font-size:15px}
+  .sec{padding:38px 16px}
+  .sec-head{margin-bottom:20px}
+  .sec-head h2,.about h2,.lead h2{font-size:27px;letter-spacing:-.9px;line-height:1.1}
+  .sec-head p{font-size:14px;margin-top:8px}
+  .kicker{font-size:10.5px;letter-spacing:1.1px}
+  .kicker::before{width:16px}
+  .glass-panel{border-radius:24px}
+  /* поля ввода 16px — иначе iPhone приближает страницу при фокусе */
+  input,textarea,select{font-size:16px!important}
+  .tp-button{min-height:48px;font-size:13px;padding:0 20px}
+
+  /* ---------- шапка ---------- */
+  .hdr{top:12px;left:12px;right:12px;height:52px;gap:6px}
+  .hdr.fixed{top:8px;left:8px;right:8px;height:56px;padding:0 6px 0 12px;border-radius:18px}
+  .hdr-logo,.hdr.fixed .hdr-logo{width:120px}
+  .hdr-call,.burger,.hdr-vip,.theme-btn{width:40px;height:40px;border-radius:13px}
+  .hdr-vip img{width:26px}
+  /* меню — выезжающая панель на весь экран под шапкой */
+  .hdr .mega{position:fixed;left:8px;right:8px;top:72px;bottom:auto;width:auto;max-height:calc(100svh - 84px);overflow:auto;grid-template-columns:1fr;gap:2px;padding:10px;border-radius:22px;background:rgba(255,255,255,.98);box-shadow:0 24px 60px rgba(20,25,28,.25)}
+  .hdr .mega a{padding:9px 10px;gap:12px}
+  .hdr .mega a img{width:32px;height:32px}
+  .mega a b{font-size:14px}
+  .mega a small{font-size:10px}
+  .menu-open{overflow:hidden}
+
+  /* ---------- первый экран (главная): текст сверху, Фемида целиком под ним ---------- */
+  .first{min-height:0;height:auto;background:#eef3f8 url(img/hero_sky_spb.webp) 22% 100%/auto 100% no-repeat}
+  .v-sky .sky-bg,.v-sky .sky-haze{display:none}
+  .hero{position:relative;left:auto;right:auto;top:auto;padding:84px 18px 0;z-index:8}
+  .hero h1{font-size:clamp(30px,8.6vw,36px);letter-spacing:-1.2px;line-height:1.05;margin:12px 0 10px}
+  .hero p{font-size:15px;line-height:1.45;margin:0 0 18px}
+  .hero p br{display:none}
+  .pill{font-size:10.5px;padding:7px 12px 7px 30px}
+  .pill-tag{width:30px;height:34px;left:-8px;top:-10px}
+  .actions{flex-direction:column;align-items:stretch;gap:10px;max-width:none}
+  .actions .tp-button{justify-content:center;font-size:13px;min-height:50px}
+  .scrim{background:linear-gradient(180deg,rgba(248,250,252,.94) 0,rgba(248,250,252,.86) 300px,rgba(248,250,252,.4) 400px,rgba(248,250,252,0) 470px)!important}
+  .fog-bottom{height:200px;bottom:-60px}
+  .wave,.wave-glass{height:56px}
+
+  /* ---------- цифры ---------- */
+  .stats{margin-top:-18px;padding:0 12px}
+  .stats-in{grid-template-columns:1fr 1fr;padding:6px;gap:0}
+  .stat{grid-template-columns:40px 1fr;column-gap:8px;padding:12px 8px}
+  .stat img{width:40px;height:40px;grid-row:span 2;margin:0}
+  .stat b{font-size:26px;letter-spacing:-1px}
+  .stat p{font-size:11.5px;line-height:1.3;margin-top:3px}
+  .stat+.stat::before{display:none}
+  .stat-cta{grid-column:1/-1;flex-direction:column;align-items:stretch;gap:8px;padding:18px;margin-top:4px;border-radius:18px}
+  .stat-cta b{font-size:17px}
+  .stat-cta p{flex:none;min-width:0;font-size:13px}
+  .stat-cta .tp-button{width:100%;white-space:normal;text-align:center;justify-content:center;font-size:12px}
+
+  /* ---------- специализации: компактные плитки 2 в ряд + «показать все» ---------- */
+  .svc-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .svc-grid .tp-card{--card-h:0px;--card-angle:0deg;--card-turn:0deg;--card-r:18px;min-height:0}
+  .svc-grid .tp-card__content{min-height:0;flex-direction:row;align-items:center;gap:10px;padding:12px 10px}
+  .svc-grid .tp-card__icon{width:40px;height:40px;margin:0;flex:none}
+  .svc small,.svc .tp-card__arrow{display:none}
+  .svc .tp-card__title{min-height:0;font-size:12.5px;line-height:1.25}
+  .svc-grid.collapsed>.tp-card:nth-child(n+9){display:none}
+  .svc-more{display:flex;width:100%;margin-top:14px;justify-content:center}
+  .features{grid-template-columns:1fr;gap:16px;margin-top:22px}
+  .feature{min-height:0;padding:22px 20px 150px;border-radius:24px;overflow:hidden;align-items:flex-start}
+  .feature-txt{max-width:100%}
+  .feature-txt b{font-size:22px;margin:8px 0 6px}
+  .feature-txt p{margin-bottom:14px;font-size:14px}
+  .feature>img,.feature:hover>img{top:auto;bottom:-14px;right:-10px;height:170px;width:auto;max-width:72%;transform:none}
+
+  /* ---------- заявка ---------- */
+  .lead-in{padding:24px 16px;gap:18px;border-radius:24px}
+  .lead-ico{width:58px;height:58px}
+  .lead h2{font-size:23px;margin:8px 0 14px}
+  .ticks{gap:8px}
+  .ticks li{padding:11px 12px 11px 44px;font-size:13.5px;border-radius:14px}
+  .ticks li::before{left:12px;width:22px;height:22px;margin-top:-11px}
+  .form-note{font-size:13.5px;margin-bottom:14px}
+  .lead-form{gap:10px}
+  .fld input,.fld textarea{padding:22px 16px 8px;border-radius:14px}
+  .fld span{left:17px;top:15px;font-size:14px}
+  .agree{font-size:12px}
+  .lead-form .tp-button{width:100%;justify-content:center}
+
+  /* ---------- «почему выбирают нас», статьи: горизонтальные карусели ---------- */
+  .adv-grid,.art-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:4px 16px 18px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .adv-grid::-webkit-scrollbar,.art-grid::-webkit-scrollbar{display:none}
+  .adv-card{flex:0 0 76%;scroll-snap-align:start;padding:20px 18px;border-radius:22px}
+  .adv-card img{width:62px;height:56px}
+  .adv-n{font-size:38px;right:16px;top:12px}
+  .adv-card h3{font-size:18px;margin:10px 0 6px}
+  .adv-card p{font-size:13.5px;line-height:1.55}
+  .art-card{flex:0 0 82%;scroll-snap-align:start;border-radius:22px}
+  .art-body{padding:16px 16px 18px}
+  .art-body b{font-size:16px}
+  .art-body p{font-size:13px;-webkit-line-clamp:3}
+  .swipe-hint{display:block;margin:-6px 0 0;font-size:12px;color:var(--muted);text-align:right}
+
+  /* ---------- отзывы ---------- */
+  .rv-top{flex-direction:column;align-items:flex-start;gap:0;margin-bottom:16px}
+  .rv-nav{display:none}
+  .rv-track{gap:12px;padding:4px 4px 16px}
+  .rv-card{flex-basis:88%;padding:22px 18px 18px;border-radius:22px}
+  .rv-q{width:44px;height:28px;margin-bottom:10px}
+  .rv-title{font-size:16px}
+  .rv-card blockquote{font-size:14px;margin:10px 0 16px}
+  .rv-card figcaption{gap:10px;padding-top:14px}
+  .rv-ava{width:38px;height:38px;font-size:13px}
+  .rv-stars{font-size:12px}
+
+  /* ---------- о компании + SEO-текст ---------- */
+  .about-in{grid-template-columns:1fr;gap:20px}
+  .seo-lead p{font-size:14.5px;line-height:1.65;margin:10px 0}
+  .about-photo{border-radius:22px}
+  .seo{padding:20px 16px 16px;margin-top:24px;gap:14px}
+  .seo-mark{font-size:220px;bottom:-40px;right:-20px}
+  .seo-toc{margin:0 -16px;padding:0 16px 4px}
+  .seo-toc a{padding:8px 10px;font-size:12.5px;border-radius:14px;max-width:210px}
+  .seo-toc a img{width:30px;height:30px}
+  .seo-body p,.seo-body li{font-size:14.5px}
+  .seo-body h2{font-size:21px}
+  .seo-body h3{font-size:17px}
+  .seo-body ul{columns:1}
+
+  /* ---------- контакты ---------- */
+  .ct-in{gap:14px}
+  .ct-map{min-height:0;border-radius:22px}
+  .ct-map iframe{height:230px}
+  .ct-card{padding:18px 16px;gap:14px;border-radius:0 0 22px 22px}
+  .ct-row img{width:38px;height:38px}
+  .ct-row b,.ct-row a{font-size:14px}
+  .ct-form{padding:22px 16px;border-radius:22px}
+  .ct-form .lead-ico{width:54px;height:54px}
+
+  /* ---------- подвал ---------- */
+  .foot{padding:10px 12px 20px}
+  .foot-in{grid-template-columns:1fr 1fr;gap:20px 14px;padding:22px 16px;border-radius:22px}
+  .foot-brand{grid-column:1/-1}
+  .foot-links{grid-column:1/-1;grid-template-columns:1fr 1fr;gap:2px 14px}
+  .foot-links a{font-size:13px;padding:6px 0}
+  .foot-req{grid-column:1/-1;font-size:12px}
+  .foot-req .tp-button{width:100%;justify-content:center}
+  .foot-tel{font-size:21px}
+  .foot-note{font-size:11px;padding:0 4px}
+
+  /* ---------- попап «Заказать звонок» — нижняя шторка ---------- */
+  .modal{place-items:end center;padding:0}
+  .modal-box{width:100%;max-width:none;max-height:92svh;padding:24px 18px calc(18px + env(safe-area-inset-bottom));border-radius:26px 26px 0 0;animation:sheetUp .4s var(--tp-ease) both}
+  @keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+  .modal-box::before{content:'';position:absolute;left:50%;top:8px;width:40px;height:4px;margin-left:-20px;border-radius:4px;background:rgba(20,25,28,.15)}
+  .modal-box h3{font-size:20px;padding-right:40px}
+  .modal-box .lead-ico{width:54px;height:54px}
+  .modal-x{right:12px;top:12px;width:36px;height:36px}
+
+  /* ---------- чат — нижняя шторка, не перекрывает контент ---------- */
+  .chat{right:12px;bottom:calc(14px + env(safe-area-inset-bottom))}
+  .chat-fab{width:52px;height:52px}
+  .chat-fab-ico,.chat-fab svg{width:30px;height:30px}
+  .chat-teaser{display:none!important}
+  .chat-box{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;height:min(80svh,620px);border-radius:24px 24px 0 0;animation:sheetUp .4s var(--tp-ease) both}
+  .chat.open .chat-fab{opacity:0;pointer-events:none}
+  .chat-head{padding:14px 12px 14px 16px}
+  .chat-in{padding:8px 10px calc(10px + env(safe-area-inset-bottom))}
+  .msg{font-size:14px;max-width:88%}
+
+  /* ---------- сноска «?» ---------- */
+  .fn-tip{max-width:calc(100vw - 24px)}
+}
+
+/* компактнее на совсем узких (iPhone SE / 360) */
+@media (max-width: 380px) {
+  .hero h1{font-size:28px}
+  .svc .tp-card__title{font-size:11.5px}
+  .stat b{font-size:22px}
+  .hdr-logo,.hdr.fixed .hdr-logo{width:104px}
+  .hdr-call,.burger,.hdr-vip,.theme-btn{width:36px;height:36px}
+}
+@media (max-width: 759px){
+  .svc .tp-card__title{overflow-wrap:normal;word-break:normal;hyphens:auto;-webkit-hyphens:auto;font-size:12px}
+}
+@media (max-width: 759px){
+  /* меню: на всю ширину, под шапкой, фон страницы затемнён; чат прячется */
+  .hdr .mega{left:8px;right:8px;width:auto;top:70px;max-height:calc(100svh - 82px)}
+  body.menu-open::after{content:'';position:fixed;inset:0;z-index:25;background:rgba(20,25,28,.35);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+  body.menu-open .chat{opacity:0;pointer-events:none}
+  .hdr{z-index:30}
+  /* попап и меню перекрывают чат */
+  body:has(.modal:not([hidden])) .chat{opacity:0;pointer-events:none}
+  /* кнопка чата не налезает на контент у правого края: компактнее и полупрозрачная тень */
+  .chat-fab{width:48px;height:48px;box-shadow:0 8px 18px rgba(190,10,32,.35)}
+  .chat-fab::before{display:none}
+  .chat-fab-ico,.chat-fab svg{width:28px;height:28px}
+  /* карта на всю ширину без пустых краёв */
+  .ct-map iframe{display:block;width:100%}
+}
+@media (max-width: 759px){
+  /* анимация въезда шапки оставляет transform — из-за него меню (position:fixed) привязывалось к шапке, а не к экрану */
+  .hdr{animation:hdrInM .7s .3s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes hdrInM{from{opacity:0}to{opacity:1}}
+  .hdr.fixed{animation:none;transform:none}
+  .hdr .mega{left:8px;right:8px;top:72px}
+}
+@media (max-width: 759px){
+  .mega-main{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
+  .mega-main a{justify-content:center;text-align:center;padding:12px 8px!important;border-radius:14px;background:rgba(200,16,46,.06)}
+  .mega-main a b{font-size:13.5px}
+  .mega-main .mega-tel{grid-column:1/-1;flex-direction:column;gap:2px!important;color:#fff;background:linear-gradient(135deg,#e2152a,#a30417)}
+  .mega-main .mega-tel b{font-size:16px;color:#fff}
+  .mega-main .mega-tel small{color:rgba(255,255,255,.85);font-size:11px}
+  .mega-title{display:block;padding:10px 10px 4px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--tp-red)}
+}

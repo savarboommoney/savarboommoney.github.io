@@ -709,3 +709,5 @@ main::before{content:'';position:absolute;left:0;right:0;top:0;height:220px;z-in
 .hero h1 .fn{width:22px;height:22px;font-size:15px;border:0;opacity:1;background:url(img/extra/fn_question.webp) center/contain no-repeat;color:transparent;-webkit-text-fill-color:transparent;box-shadow:none;vertical-align:1.25em;margin-left:4px}
 .hero h1 .fn:hover,.hero h1 .fn:focus-visible{background:url(img/extra/fn_question.webp) center/contain no-repeat;transform:scale(1.1) rotate(-6deg);color:transparent;-webkit-text-fill-color:transparent}
 @media(max-width:759px){.hero h1 .fn{width:16px;height:16px}}
+.svc-more,.swipe-hint{display:none}
+.mega-main,.mega-title{display:none}

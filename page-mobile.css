@@ -1,0 +1,157 @@
+/* =====================================================================
+   МОБИЛЬНАЯ ВЕРСИЯ ВНУТРЕННИХ СТРАНИЦ (≤ 759 px): услуги, цены, о компании,
+   блог, статьи, юрист, текстовые. Подключается последним.
+   ===================================================================== */
+@media (max-width: 759px) {
+  .page main{padding-top:72px}
+  .page main::before{height:460px}
+
+  /* шапка страницы: компактная сцена сверху, текст под ней */
+  .pg-hero{grid-template-columns:1fr;gap:0;padding:4px 16px 8px;min-height:0}
+  .pg-hero-art{order:-1;max-width:none;margin:0 -16px;height:210px;overflow:hidden;display:block}
+  .pg-hero-art::before{inset:0 15%}
+  .pg-hero-art img{display:block;height:230px;width:auto;max-width:none;margin:0 auto}
+  .crumbs{font-size:11.5px;margin-bottom:12px;gap:6px}
+  .crumbs b{display:none}
+  .crumbs span:last-of-type{display:none}
+  .pg-ico{width:52px;height:52px;border-radius:16px;margin-bottom:10px}
+  .pg-ico img{width:36px;height:36px}
+  .pg-hero h1{font-size:clamp(26px,7.6vw,32px);letter-spacing:-1px;line-height:1.08;margin:0 0 12px}
+  .pg-lead{font-size:14.5px;margin:0 0 14px}
+  .pg-badges{flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:0 -16px 16px;padding:2px 16px 4px;scrollbar-width:none}
+  .pg-badges::-webkit-scrollbar{display:none}
+  .pg-badges span{flex:none;font-size:12px;padding:7px 11px}
+  .pg-hero .actions{flex-direction:column;align-items:stretch;gap:8px}
+  .pg-hero .actions .tp-button{justify-content:center;white-space:normal;text-align:center}
+  .pg-hero--text,.pg-hero--blog,.art-hero,.lw-hero{padding-top:8px}
+
+  /* подуслуги */
+  .chips{grid-template-columns:1fr;gap:6px}
+  .chip{padding:13px 14px;font-size:13.5px;border-radius:14px}
+
+  /* описание услуги */
+  .pg-desc-body>ul{grid-template-columns:1fr;gap:8px}
+  .pg-desc-body>ul li{padding:14px 14px 14px 48px;font-size:14px;border-radius:16px}
+  .pg-desc-body>ul li::before{left:14px;top:15px;width:22px;height:22px}
+  .vids{grid-template-columns:1fr;gap:12px;margin:18px 0}
+  .vid{border-radius:18px}
+  .vid-play{width:52px;height:52px;margin:-26px 0 0 -26px}
+  .vid-play::before{left:21px;top:16px;border-left-width:15px;border-top-width:10px;border-bottom-width:10px}
+
+  /* основной текст */
+  .pg-article-in{grid-template-columns:1fr!important;gap:14px;padding:18px 16px;border-radius:22px}
+  .pg-toc{position:static;flex-direction:row;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:0 -16px;padding:0 16px 6px;scrollbar-width:none}
+  .pg-toc::-webkit-scrollbar{display:none}
+  .pg-toc .kicker{display:none}
+  .pg-toc a,.pg-toc a.lv3{flex:none;max-width:220px;padding:8px 12px;font-size:12.5px;background:rgba(255,255,255,.75);border:1px solid #fff;border-radius:12px}
+  .prose{font-size:15px;line-height:1.7}
+  .prose h2{font-size:21px;margin:30px 0 10px}
+  .prose h3{font-size:17px;margin:22px 0 8px}
+  .prose ul li,.prose ol:not(.steps) li{padding-left:22px}
+  .prose ul li::before{width:9px;height:9px;top:.68em}
+
+  /* прайс */
+  .price{gap:6px}
+  .price-row{grid-template-columns:1fr auto;gap:6px 10px;padding:12px 14px;border-radius:14px}
+  .price-name{grid-column:1/-1;font-size:14px}
+  .price-val{grid-column:1;font-size:15px;align-self:center}
+  .price-btn{grid-column:2;grid-row:2;padding:8px 12px;font-size:12px}
+
+  /* шаги */
+  .steps{grid-template-columns:1fr;gap:8px}
+  .step{flex-direction:row;gap:12px;padding:14px;border-radius:16px}
+  .step img{height:42px;width:auto}
+  .step-n{font-size:26px}
+  .step b{font-size:15px}
+  .step p{font-size:13.5px}
+
+  /* слово юриста */
+  .lawyer-in{grid-template-columns:1fr;padding:0 16px;gap:0;border-radius:22px}
+  .lawyer-ph{order:-1;position:static;margin:0 -16px;display:flex;justify-content:center;max-height:300px;overflow:hidden}
+  .lawyer-ph img{max-width:260px;margin-top:16px}
+  .lawyer-ring{display:none}
+  .lawyer-txt{padding:18px 0 22px}
+  .lawyer-name{font-size:21px}
+  .lawyer-pos{font-size:12.5px}
+  .lawyer-sign{width:110px;margin:4px 0 8px}
+  .lawyer-body{padding-left:12px;font-size:14px}
+  .lawyer-body::before{display:none}
+
+  /* стоимость */
+  .pr-intro-in{grid-template-columns:1fr;gap:18px}
+  .pr-cards{grid-template-columns:1fr 1fr;gap:8px}
+  .pr-card{padding:14px 12px;gap:6px;border-radius:16px}
+  .pr-card img{width:42px;height:40px}
+  .pr-card p{font-size:12.5px}
+  .pr-tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 12px;padding:4px 16px 8px;gap:6px;scrollbar-width:none}
+  .pr-tabs::-webkit-scrollbar{display:none}
+  .pr-tab{flex:none;font-size:12.5px;padding:8px 14px 8px 8px}
+  .pr-tab img{width:28px;height:28px}
+  .pr-panel{padding:16px 12px;border-radius:20px}
+  .pr-panel h3{font-size:17px;margin-bottom:10px}
+  .pr-installment{flex-wrap:wrap;gap:12px;padding:16px;border-radius:20px}
+  .pr-installment img{width:56px;height:52px}
+  .pr-installment b{font-size:17px}
+  .pr-installment .tp-button{width:100%;margin-left:0;justify-content:center}
+
+  /* о компании */
+  .ab-stats-in{grid-template-columns:1fr 1fr}
+  .ab-media-ico{width:52px;height:52px;border-radius:16px}
+  .ab-media-ico img{width:36px;height:36px}
+  .md-grid{grid-template-columns:1fr;gap:10px}
+  .md-card{padding:16px;border-radius:18px}
+  .md-card b{font-size:15px}
+  .ab-video{padding:8px;border-radius:20px}
+
+  /* блог */
+  .bl-search{max-width:none}
+  .bl-top{margin-top:16px;border-radius:22px;aspect-ratio:16/11}
+  .bl-top-txt{left:16px;right:16px;bottom:14px}
+  .bl-top-txt b{font-size:18px}
+  .bl-filter{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 16px;padding:4px 16px 8px;gap:6px;scrollbar-width:none}
+  .bl-filter::-webkit-scrollbar{display:none}
+  .bl-filter button{flex:none;padding:8px 14px;font-size:12.5px}
+  .bl-grid,.bl-grid--3{grid-template-columns:1fr;gap:12px}
+  .bl-card{flex-direction:row;border-radius:18px;min-height:110px}
+  .bl-card .bl-img{flex:0 0 112px;aspect-ratio:auto}
+  .bl-card .bl-tag{display:none}
+  .bl-body{padding:12px 14px}
+  .bl-body b{font-size:14.5px;line-height:1.3}
+  .bl-body p{display:none}
+  .bl-body .more{margin-top:8px;font-size:12px}
+
+  /* статья */
+  .art-cover{order:-1;margin:0 -16px 14px;border-radius:0;border:0;aspect-ratio:16/10;box-shadow:none}
+  .art-hero h1{font-size:clamp(24px,7vw,30px)}
+  .art-meta{margin-bottom:10px}
+  .art-fig{margin:16px -4px;border-radius:14px}
+  .prose table{font-size:13px}
+  .art-cta{flex-direction:column;align-items:flex-start;gap:10px;padding:18px;border-radius:20px}
+  .art-cta img{width:52px;height:52px}
+  .art-cta .tp-button{width:100%;margin-left:0;justify-content:center}
+
+  /* профиль юриста */
+  .lw-photo{order:-1;max-width:none;margin:0 -16px;height:330px;overflow:hidden;display:flex;justify-content:center}
+  .lw-photo img{max-width:300px}
+  .lw-photo .lawyer-ring{display:none}
+  .lw-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .lw-fact{padding:14px 12px;border-radius:16px}
+  .lw-fact img{width:38px;height:36px}
+  .lw-fact small{font-size:10px}
+  .lw-fact b{font-size:13px}
+  .lw-body{grid-template-columns:1fr!important}
+
+  /* текстовые / карта сайта */
+  .sm-group .chips{grid-template-columns:1fr}
+}
+@media (max-width: 759px){
+  /* галочки в «Почему с нами проще» (перебивались общими маркерами списков) */
+  .pg-desc-body.prose>ul li::before{left:14px;top:14px;width:22px;height:22px;border-radius:50%}
+  /* видео — карусель */
+  .vids{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:16px -16px;padding:0 16px 8px;scrollbar-width:none}
+  .vids::-webkit-scrollbar{display:none}
+  .vid{flex:0 0 78%;scroll-snap-align:start;aspect-ratio:16/11}
+  .vid-t{font-size:13px;left:14px;right:14px;bottom:12px}
+  /* подуслуги свёрнуты до 8 */
+  .chips.collapsed>.chip:nth-child(n+9){display:none}
+}

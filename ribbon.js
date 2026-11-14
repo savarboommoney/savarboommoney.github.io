@@ -17,13 +17,13 @@ function build() {
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.style.height = H + 'px';
   // опорные точки: по краям у каждого блока, переходы — в промежутках между блоками
   const secs = [...main.querySelectorAll(':scope > section')];
-  const pts = [[W * (mobile ? 1.04 : .9), -40]];
+  const pts = [[W * .9, -40]];
   secs.forEach((s, i) => {
     const y = s.offsetTop + s.offsetHeight * .5;
     // на телефоне лента вьётся только у правого края и не пересекает текст
-    pts.push(mobile ? [W * (i % 2 ? 1.02 : .955), y] : [i % 2 ? W * .975 : W * .025, y]);
+    pts.push(mobile ? [i % 2 ? W * .985 : W * .015, y] : [i % 2 ? W * .975 : W * .025, y]);
   });
-  pts.push([mobile ? W * .96 : W * .5, H - 90]);
+  pts.push([W * .5, H - 90]);
   // Catmull-Rom → кубические кривые; точки считаем сами (getPointAtLength на длинном пути — секунды на слабом телефоне)
   let d = `M${pts[0][0]},${pts[0][1]}`;
   const dense = [[pts[0][0], pts[0][1]]];
@@ -38,7 +38,7 @@ function build() {
   const len = acc[acc.length - 1];
   let j = 0; const at = s => { while (j < acc.length - 2 && acc[j + 1] < s) j++; while (j > 0 && acc[j] > s) j--; const f = (s - acc[j]) / ((acc[j + 1] - acc[j]) || 1); return { x: dense[j][0] + (dense[j + 1][0] - dense[j][0]) * f, y: dense[j][1] + (dense[j + 1][1] - dense[j][1]) * f }; };
   svg.replaceChildren();
-  const N = Math.round(len / 9), wMax = mobile ? 18 : 38, twists = len / (mobile ? 520 : 760);
+  const N = Math.round(len / 9), wMax = mobile ? 15 : 38, twists = len / (mobile ? 600 : 760);
   const P = [];
   for (let i = 0; i <= N; i++) {
     const s = len * i / N, r = at(Math.max(0, s - 1)), q = at(Math.min(len, s + 1)), p = at(s);
