@@ -284,3 +284,15 @@
 .page--vip #lead .ticks li::before,.page--vip #lead .agree input:checked+i,.page--vip #contacts .agree input:checked+i{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E"),linear-gradient(135deg,#f01b2b,#a30417)}
 .page--vip #lead .lead h2 em,.page--vip #lead h2 em,.page--vip #contacts .kicker,.page--vip #contacts h2 em,.page--vip #lead .kicker{color:var(--tp-red)}
 .page--vip #contacts .kicker::before,.page--vip #lead .kicker::before{background:linear-gradient(90deg,#f01b2b,#a30417)}
+
+/* прайс: строки не шире колонки текста */
+.price{grid-template-columns:minmax(0,1fr)}
+.price-row{min-width:0}
+.price-name{min-width:0;overflow-wrap:anywhere}
+.prose img{max-width:100%;height:auto;border-radius:12px}
+.prose .step img{height:54px;width:auto;max-width:none;border-radius:0}
+@media(max-width:759px){.prose .step img{height:42px}}
+/* профиль юриста: текст и эфир в две колонки (общее правило «без оглавления — одна колонка» его ломало) */
+.pg-article-in.lw-body{grid-template-columns:1.1fr .9fr;align-items:start}
+.lw-video .vid{aspect-ratio:16/10}
+@media(max-width:960px){.pg-article-in.lw-body{grid-template-columns:1fr}}
