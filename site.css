@@ -1,0 +1,94 @@
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@supports (-moz-appearance:none){html{scrollbar-color:#c8102e #eef1f5}} /* только Firefox: в Chrome это свойство отключает стили ниже */
+/* полоса прокрутки в цветах сайта: светлая дорожка, красный глянцевый ползунок */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#eef1f5}
+::-webkit-scrollbar-thumb{background:linear-gradient(90deg,#e01226,#b5061b);border-radius:10px;border:2px solid #eef1f5}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(90deg,#ff2a3d,#c30922)}
+::-webkit-scrollbar-button:single-button{display:block;height:14px;background:#eef1f5 center/10px no-repeat}
+::-webkit-scrollbar-button:single-button:vertical:decrement{background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><path d='M1.5 6.8 5 3.2l3.5 3.6z' fill='%23d4112b'/></svg>")}
+::-webkit-scrollbar-button:single-button:vertical:increment{background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><path d='M1.5 3.2 5 6.8l3.5-3.6z' fill='%23d4112b'/></svg>")}
+::-webkit-scrollbar-button:single-button:hover{background-color:#e3e8ee}
+body{margin:0;background:#f4f6f8;color:#14191c;font-family:Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+em{font-style:normal;color:#c30922}
+img{display:block}
+.svg-defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---------- первый экран ---------- */
+/* небо — на всю секцию (на телефоне сцена сдвинута вниз, сверху не должно быть стыка) */
+.first{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;
+  background:radial-gradient(ellipse 60% 45% at 62% 22%,#fff 0%,rgba(255,255,255,0) 75%),linear-gradient(180deg,#e6ebf1 0%,#eef1f5 35%,#f6f7f9 62%,#fbfbfc 100%)}
+/* сцена 1920×1080: все слои в одних координатах */
+.frame{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.scene{position:absolute;inset:0;animation:sceneIn 1.8s cubic-bezier(.2,.7,.2,1) both}
+.ly{position:absolute;inset:0;will-change:transform}
+.ly img{position:absolute;display:block;height:auto}
+.cl-tl{left:-420px;top:-300px;width:1250px;transform:scaleY(-1);opacity:.82;filter:brightness(1.14) saturate(.55);-webkit-mask-image:linear-gradient(to right,#000 55%,transparent 96%);mask-image:linear-gradient(to right,#000 55%,transparent 96%)}
+.cl-tr{right:-460px;top:-320px;width:1300px;transform:scale(-1,-1);opacity:.82;filter:brightness(1.14) saturate(.55);-webkit-mask-image:linear-gradient(to right,#000 55%,transparent 96%);mask-image:linear-gradient(to right,#000 55%,transparent 96%)}
+.city{left:-230px;top:330px;width:2380px;filter:saturate(1.12) contrast(1.05)}
+.city-warm{position:absolute;left:0;right:0;top:400px;height:460px;background:radial-gradient(ellipse 55% 60% at 30% 55%,rgba(255,214,170,.32),rgba(255,214,170,0) 70%);mix-blend-mode:soft-light}
+.haze{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.08) 40%,rgba(255,255,255,.2) 80%,rgba(255,255,255,.45) 100%)}
+.bloom{position:absolute;left:1020px;top:40px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(255,255,255,.55) 35%,rgba(255,255,255,0) 68%)}
+/* Фемида: группа 1600×900 из комплекта Codex */
+.art{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0;transform:translate(416px,106px) scale(.74)}
+.a-back{left:650px;top:330px;width:1020px}
+.a-body{left:880px;top:20px;width:710px;filter:brightness(1.04) contrast(1.04)}
+.a-front{left:650px;top:330px;width:1020px;filter:saturate(1.1)}
+.art .cl-under{left:789px;top:492px;width:1554px;transform:scaleX(-1);filter:brightness(1.12) saturate(.5);-webkit-mask-image:radial-gradient(ellipse 50% 60% at 50% 60%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 50% 60% at 50% 60%,#000 55%,transparent 100%)}
+.cl-bottom{left:-260px;top:770px;width:2440px;filter:brightness(1.1) saturate(.55)}
+.fog-bottom{position:absolute;left:-200px;right:-200px;bottom:-200px;height:320px;background:linear-gradient(180deg,rgba(250,251,252,0),rgba(250,251,252,.85) 70%)}
+/* весы висят на кольце в руке: вращаются вокруг точки подвеса — покачивание + наклон за мышкой */
+.a-scales{left:882.6px;top:75.1px;width:390px;transform-origin:49.85% 9.59%;will-change:transform,rotate;animation:sway 6s ease-in-out infinite}
+@keyframes sway{0%,100%{rotate:0deg}25%{rotate:1.8deg}75%{rotate:-1.8deg}}
+
+/* подложка только под текстом — город внизу слева остаётся ярким */
+.scrim{position:absolute;inset:0;z-index:5;pointer-events:none;animation:fadeIn 1.2s .3s both;background:radial-gradient(ellipse 34% 48% at 19% 40%,rgba(246,248,250,.9) 0%,rgba(246,248,250,.7) 55%,rgba(246,248,250,0) 100%)}
+/* волна — переход в следующий блок: полупрозрачная стеклянная волна + плотная волна цвета страницы */
+.wave{position:absolute;left:0;bottom:-1px;width:100%;height:clamp(70px,9vw,150px);z-index:6;pointer-events:none;display:block}
+.wave .w1{fill:none}
+/* полупрозрачная волна — стекло: размывает то, что под ней; форма задана маской */
+.wave-glass{position:absolute;left:0;bottom:0;width:100%;height:clamp(70px,9vw,150px);z-index:6;pointer-events:none;background:rgba(255,255,255,.38);backdrop-filter:blur(4px) saturate(1.05);-webkit-backdrop-filter:blur(4px) saturate(1.05);-webkit-mask:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150' preserveAspectRatio='none'><filter id='b'><feGaussianBlur stdDeviation='1.5'/></filter><path filter='url(%23b)' d='M0 62C180 18 360 10 560 46S900 120 1110 92 1350 30 1440 40V160H0Z'/></svg>") 0 0/100% 100% no-repeat;mask:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150' preserveAspectRatio='none'><filter id='b'><feGaussianBlur stdDeviation='1.5'/></filter><path filter='url(%23b)' d='M0 62C180 18 360 10 560 46S900 120 1110 92 1350 30 1440 40V160H0Z'/></svg>") 0 0/100% 100% no-repeat}
+.wave .w2{fill:#f4f6f8}
+.hdr{position:absolute;top:24px;left:6%;right:6%;height:55px;display:flex;align-items:center;gap:30px;z-index:9;animation:hdrIn .9s .5s cubic-bezier(.2,.7,.2,1) both}
+.hdr-logo{width:180px;flex:none}
+.hdr-logo img{width:100%;height:auto}
+.hdr nav{display:flex;gap:30px;margin:0 auto;font-size:13px;font-weight:750}
+.hdr nav a{text-decoration:none}
+.hdr nav a:hover{color:#c30922}
+.hdr-phone{display:flex;flex-direction:column;text-decoration:none;line-height:1.25;text-align:right}
+.hdr-phone b{font-size:15px;font-weight:800}
+.hdr-phone small{font-size:11px;color:#5d686c}
+.hdr .tp-button{font-size:11px;min-height:40px}
+.hero{position:absolute;left:7%;top:24%;z-index:8}
+.hero>*{animation:riseIn 1s cubic-bezier(.2,.7,.2,1) both}
+.hero>:nth-child(1){animation-delay:.7s}.hero>:nth-child(2){animation-delay:.85s}.hero>:nth-child(3){animation-delay:1s}.hero>:nth-child(4){animation-delay:1.15s}
+.pill{display:inline-block;padding:9px 14px;background:rgba(255,255,255,.6);border:1px solid #fff;border-radius:99px;font-size:12px;color:#2e383a;backdrop-filter:blur(9px)}
+.hero h1{font-size:clamp(38px,3.9vw,61px);line-height:1.04;letter-spacing:-2px;font-weight:800;margin:19px 0}
+.hero p{font-size:clamp(14px,1.3vw,20px);color:#536064;line-height:1.47;margin:0 0 27px}
+.actions{display:flex;gap:14px}
+.actions .tp-button{font-size:12px;padding:0 25px;min-height:48px}
+
+@keyframes sceneIn{from{opacity:0;transform:scale(1.035);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes hdrIn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes riseIn{from{opacity:0;transform:translateY(24px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+
+@media(max-width:1280px){.hdr-phone{display:none}}
+@media(max-width:1200px){.hdr nav{gap:20px;font-size:12px}.hero{left:5%}.hero h1{font-size:45px}}
+@media(max-width:960px){.hdr nav{display:none}.hdr .tp-button{margin-left:auto}}
+@media(max-width:759px){
+  .hdr{top:15px;left:20px;right:20px}.hdr-logo{width:150px}.hdr .tp-button{display:none}
+  .hero{left:22px;right:22px;top:12%}
+  .hero h1{font-size:clamp(30px,9.5vw,38px);letter-spacing:-1.2px;margin:14px 0}
+  .hero p{font-size:14px;margin-bottom:18px}
+  .actions .tp-button{font-size:10px;padding:0 15px;min-height:42px}
+  .pill{font-size:9px;padding:7px 11px}
+  .scrim{background:linear-gradient(180deg,rgba(246,248,250,.95) 0%,rgba(246,248,250,.82) 36%,rgba(246,248,250,0) 56%)}
+  
+  
+  
+  
+}
+@media(prefers-reduced-motion:reduce){.scene,.scrim,.hdr,.hero>*,.a-scales{animation:none}}

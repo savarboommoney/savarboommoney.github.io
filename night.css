@@ -1,0 +1,106 @@
+/* ===================== Ночной режим ===================== */
+/* переключатель */
+.theme-btn{position:relative;flex:none;width:42px;height:42px;border-radius:50%;padding:0;cursor:pointer;display:grid;place-items:center;color:#d4112b;background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,255,255,.55));border:1px solid #fff;box-shadow:0 6px 16px rgba(40,48,60,.12),inset 0 1px 1px #fff;transition:transform .4s var(--tp-ease),background .4s,color .4s,box-shadow .4s}
+.theme-btn:hover{transform:rotate(-18deg) scale(1.06)}
+.theme-btn svg{width:22px;height:22px;overflow:visible}
+.tb-core{fill:currentColor;transition:r .5s var(--tp-ease)}
+.tb-cut{transition:cx .5s var(--tp-ease),cy .5s var(--tp-ease)}
+.tb-rays{stroke:currentColor;stroke-width:2;stroke-linecap:round;transform-origin:12px 12px;transition:transform .5s var(--tp-ease),opacity .3s}
+[data-theme=night] .theme-btn{color:#fff;background:linear-gradient(145deg,#26303c,#141a22);border-color:rgba(255,255,255,.14);box-shadow:0 0 0 1px rgba(255,255,255,.12),0 0 20px rgba(255,255,255,.18)}
+[data-theme=night] .tb-core{r:8.5px}
+[data-theme=night] .tb-cut{cx:17px;cy:6.5px}
+[data-theme=night] .tb-rays{transform:rotate(90deg) scale(.4);opacity:0}
+@media(max-width:960px){.theme-btn{width:44px;height:44px;border-radius:14px}}
+
+/* круговое раскрытие темы от кнопки (View Transitions) */
+.theme-anim::view-transition-old(root){animation:none}
+.theme-anim::view-transition-new(root){animation:themeReveal .75s cubic-bezier(.6,.05,.3,1) both}
+@keyframes themeReveal{from{clip-path:circle(0 at var(--tx) var(--ty))}to{clip-path:circle(var(--tr) at var(--tx) var(--ty))}}
+
+/* --- первый экран ночью --- */
+.night-sky{position:absolute;inset:0;opacity:0;transition:opacity .8s;pointer-events:none;
+  background:
+    radial-gradient(1px 1px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 27% 9%,#fff,transparent),radial-gradient(1.5px 1.5px at 41% 22%,#fff,transparent),
+    radial-gradient(1px 1px at 55% 6%,#fff,transparent),radial-gradient(1px 1px at 63% 27%,#fff,transparent),radial-gradient(1.5px 1.5px at 78% 12%,#fff,transparent),
+    radial-gradient(1px 1px at 88% 30%,#fff,transparent),radial-gradient(1px 1px at 94% 8%,#fff,transparent),radial-gradient(1px 1px at 8% 35%,#fff,transparent),
+    radial-gradient(1px 1px at 34% 33%,#fff,transparent),radial-gradient(1.5px 1.5px at 70% 4%,#fff,transparent),radial-gradient(1px 1px at 48% 14%,#fff,transparent),
+    linear-gradient(180deg,#070b16 0%,#0e1830 38%,#1b2540 62%,#2a2a3c 100%)}
+.moon{position:absolute;right:9%;top:9%;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 38% 36%,#fffaf0,#f2e6c8 55%,#d9c9a3);box-shadow:0 0 40px 10px rgba(255,236,190,.35),0 0 120px 40px rgba(255,220,160,.12)}
+[data-theme=night] .night-sky{opacity:1}
+[data-theme=night] .first{background:#0d1426}
+[data-theme=night] .cl-tl,[data-theme=night] .cl-tr{filter:brightness(.42) saturate(.6) hue-rotate(195deg);opacity:.7}
+[data-theme=night] .city{filter:brightness(.5) saturate(1.25) contrast(1.15) hue-rotate(-6deg)}
+[data-theme=night] .city-warm{background:radial-gradient(ellipse 60% 40% at 30% 70%,rgba(255,170,70,.28),transparent 70%);mix-blend-mode:screen}
+[data-theme=night] .haze{background:linear-gradient(180deg,rgba(13,20,38,0) 40%,rgba(13,20,38,.25) 80%,rgba(13,20,38,.6) 100%)}
+[data-theme=night] .bloom{opacity:.25}
+[data-theme=night] .a-body{filter:brightness(.82) contrast(1.08) drop-shadow(-6px -4px 18px rgba(255,226,170,.25))}
+[data-theme=night] .a-scales{filter:brightness(.9) drop-shadow(0 0 10px rgba(255,200,120,.35))}
+[data-theme=night] .cl-under,[data-theme=night] .cl-bottom{filter:brightness(.45) saturate(.5) hue-rotate(200deg)}
+[data-theme=night] .fog-bottom{background:linear-gradient(180deg,rgba(13,18,28,0),rgba(13,18,28,.9) 70%)}
+[data-theme=night] .scrim{background:radial-gradient(ellipse 34% 48% at 19% 40%,rgba(9,13,24,.75) 0%,rgba(9,13,24,.5) 55%,rgba(9,13,24,0) 100%)}
+[data-theme=night] .wave .w2{fill:#0f141b}
+[data-theme=night] .wave-glass{background:rgba(20,26,36,.45)}
+
+/* --- общие цвета --- */
+[data-theme=night]{--bg:#0f141b;--ink:#eef1f4;--muted:#9aa6ad;color-scheme:dark}
+[data-theme=night] body{color:#eef1f4;background:radial-gradient(900px 600px at 95% 18%,rgba(200,16,46,.10),transparent 70%),radial-gradient(800px 700px at 0% 55%,rgba(255,255,255,.03),transparent 70%),#0f141b}
+[data-theme=night] .hero h1,[data-theme=night] .hdr nav,[data-theme=night] .hdr-logo{color:#fff}
+[data-theme=night] .hero p{color:#d5dbe0}
+[data-theme=night] .pill{background:rgba(20,26,36,.6);border-color:rgba(255,255,255,.12);color:#d5dbe0}
+[data-theme=night] .hdr-logo img,[data-theme=night] .foot-brand .logo img{content:url(img/logo-horizontal-night.svg)}
+[data-theme=night] .logo-sub text{fill:#9aa6ad}
+[data-theme=night] .hdr .hdr-nav{background:rgba(20,26,36,.55);border-color:rgba(255,255,255,.1);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+
+[data-theme=night] .hdr.fixed{background:rgba(16,21,29,.82);border-color:rgba(255,255,255,.08);box-shadow:0 14px 40px rgba(0,0,0,.4)}
+[data-theme=night] .hdr.fixed .hdr-nav{background:none}
+[data-theme=night] .hp-ico{background:radial-gradient(circle at 35% 28%,#2a3440,#161c25);border-color:rgba(255,255,255,.1)}
+[data-theme=night] .hdr .hdr-phone:hover{background:rgba(255,255,255,.06)}
+[data-theme=night] .tp-button--secondary{--btn-bg:linear-gradient(155deg,rgba(40,48,60,.9),rgba(24,30,40,.85));color:#fff;border-color:rgba(255,255,255,.12)}
+[data-theme=night] .tp-button--outline{--btn-bg:rgba(255,255,255,.04);color:#ff5a66;border-color:rgba(255,90,102,.35)}
+
+/* стекло → тёмное стекло */
+[data-theme=night] .glass-panel,[data-theme=night] .adv-card,[data-theme=night] .art-card,[data-theme=night] .feature--law,[data-theme=night] .mega,[data-theme=night] .modal-box,[data-theme=night] .ct-card,[data-theme=night] .chat-box,[data-theme=night] .chat-teaser{background:linear-gradient(140deg,rgba(32,40,52,.78),rgba(18,23,31,.66));border-color:rgba(255,255,255,.09);box-shadow:0 24px 60px rgba(0,0,0,.35),inset 0 1px 1px rgba(255,255,255,.06);color:#eef1f4}
+[data-theme=night] .tp-card__surface{background:linear-gradient(139deg,rgba(40,48,60,.8),rgba(22,28,37,.7));border-color:rgba(255,255,255,.08);box-shadow:inset 1px 1px 1px rgba(255,255,255,.08),0 18px 31px rgba(0,0,0,.3)}
+[data-theme=night] .tp-card__surface::after{background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.02) 42%,rgba(255,255,255,.12) 84%,rgba(255,255,255,.25))}
+[data-theme=night] .tp-card__lip{background:rgba(255,255,255,.08)}
+[data-theme=night] .tp-card{color:#eef1f4}
+[data-theme=night] .tp-card__arrow{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);color:#ff5a66}
+[data-theme=night] .svc small{color:#8b979e}
+[data-theme=night] .ticks li,[data-theme=night] .msg--bot{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08);color:#e3e8eb}
+[data-theme=night] .fld input,[data-theme=night] .fld textarea,[data-theme=night] .chat-in input{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:#fff}
+[data-theme=night] .fld input:focus,[data-theme=night] .fld textarea:focus{background:rgba(255,255,255,.08)}
+[data-theme=night] .agree i{background:rgba(255,255,255,.06)}
+[data-theme=night] .form-ok{background:rgba(18,23,31,.96)}
+[data-theme=night] .chat-in{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
+[data-theme=night] .chat-quick button,[data-theme=night] .seo-more,[data-theme=night] .modal-x,[data-theme=night] .soc{background:rgba(255,255,255,.06);border-color:rgba(255,90,102,.3);color:#ff5a66}
+[data-theme=night] .rv-card blockquote,[data-theme=night] .seo-lead p,[data-theme=night] .seo-body p,[data-theme=night] .seo-body li{color:#c3ccd2}
+[data-theme=night] .rv-card figcaption{border-color:rgba(255,255,255,.1)}
+[data-theme=night] .stat+.stat::before{background:linear-gradient(transparent,rgba(255,255,255,.12),transparent)}
+[data-theme=night] .about-photo{background:#1a212b}
+[data-theme=night] .about-photo img{filter:brightness(.92)}
+[data-theme=night] .ct-map iframe{filter:invert(.9) hue-rotate(180deg) saturate(.6) brightness(.95)}
+[data-theme=night] .foot-links a,[data-theme=night] .foot-tel,[data-theme=night] .ct-row b,[data-theme=night] .ct-row a{color:#eef1f4}
+[data-theme=night] .foot-sky{filter:brightness(.7) saturate(1.2)}
+[data-theme=night] .foot-note{color:#7f8b92}
+[data-theme=night] .modal-gift{background:rgba(200,16,46,.15);color:#d5dbe0}
+[data-theme=night] .fn-tip{background:rgba(24,30,40,.97);border-color:rgba(255,255,255,.1);color:#c3ccd2}
+[data-theme=night] .art .spb-badge{background:linear-gradient(135deg,rgba(40,50,70,.55),rgba(20,26,40,.3));border-color:rgba(255,255,255,.18);color:#fff}
+[data-theme=night] .spb-badge span{color:#b8c2c8}
+[data-theme=night] .silk-shadow{stroke:rgba(0,0,0,.45)}
+[data-theme=night] .rv-dots button{background:rgba(255,255,255,.18)}
+[data-theme=night] .rv-dots button.on{background:var(--tp-red)}
+
+/* ===================== Плавные переходы между страницами ===================== */
+@view-transition{navigation:auto}
+.hdr{view-transition-name:site-header}
+::view-transition-old(root){animation:vtOut .35s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(root){animation:vtIn .55s cubic-bezier(0,0,.2,1) both}
+@keyframes vtOut{to{opacity:0;transform:translateY(-14px) scale(.99);filter:blur(4px)}}
+@keyframes vtIn{from{opacity:0;transform:translateY(22px);filter:blur(6px)}}
+@media(prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
+.moon{left:44%;right:auto;top:12%;width:70px;height:70px}
+[data-theme=night] .chat-teaser span{color:#aab4ba}
+[data-theme=night] .art-img img,[data-theme=night] .about-photo img{filter:brightness(.82) saturate(.95)}
+/* настоящий ночной Петербург от Codex (тот же кадр, что днём) */
+[data-theme=night] .city{content:url(img/extra/hero_city_night.webp);filter:saturate(1.05) contrast(1.02)}
+[data-theme=night] .city-warm{opacity:.5}
